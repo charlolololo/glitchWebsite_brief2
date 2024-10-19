@@ -56,6 +56,7 @@ function updateGlitch1() {
         glitch1Glitches.forEach(glitch => glitch.display());
     }
 }
+// only need this function if i have classes
 
 // Expose the functions and class globally for a2_final.js
 window.RectangleGlitch = RectangleGlitch;

@@ -9,7 +9,9 @@ let song1;  // Declare song1 globally so it can be used in glitch2.js
 
 function preload() {
     console.log("Preloading assets...");
-    nokia = loadFont('data/nokiafc22.ttf');
+    nokia = loadFont('data/nokiafc22.ttf', () => {
+        console.log("Nokia font loaded successfully!");
+    });
     song1 = loadSound('data/glitch2_audio.mp3');  // Load sound globally
 }
 
@@ -68,6 +70,7 @@ function selectOption() {
             triggerGlitch2();  // Activate glitch2 from glitch2.js
             break;
         case 'reckon':
+            triggerGlitch3();  // Activate glitch3 from glitch3.js
             break;
         case 'sense':
             break;
@@ -95,6 +98,7 @@ function clearGlitches() {
     triggerGlitch = false;  // Stop triggering glitches
     deactivateGlitch1();  // Deactivate glitch1 and reset frame rate
     deactivateGlitch2();  // Deactivate glitch2 and stop the sound
+    deactivateGlitch3();  // Deactivate glitch3 and clear the buttons
 }
 
 function draw() {
@@ -112,8 +116,10 @@ function draw() {
     // Continuously update glitch1 if it's active
     updateGlitch1();
 
-    // Continuously update glitch2 if it's active
-    updateGlitch2();
+    // Trigger glitch3 if active
+    if (glitch3Active) {
+        drawGlitch3();  // Call the draw loop for glitch3
+    }
 
     // Display all regular glitches
     glitches.forEach(glitch => glitch.display());

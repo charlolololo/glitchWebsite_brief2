@@ -20,13 +20,6 @@ function deactivateGlitch2() {
     glitch2Glitches = [];  // Clear the glitch array
 }
 
-function updateGlitch2() {
-  if (glitch2Active) {
-      // You can add visual glitches here or other effects if needed
-  }
-}
-
 // Expose the functions to a2_final.js
 window.triggerGlitch2 = triggerGlitch2;
 window.deactivateGlitch2 = deactivateGlitch2;
-window.updateGlitch2 = updateGlitch2;

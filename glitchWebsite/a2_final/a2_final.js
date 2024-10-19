@@ -64,21 +64,23 @@ function selectOption() {
     let selectedOption = dropdown.value();
     switch (selectedOption) {
         case 'believe':
-            triggerGlitch1();  // Activate glitch1 from glitch1.js
+            triggerGlitch1();   // Activate glitch1 from glitch1.js
             break;
         case 'conclude':
-            triggerGlitch2();  // Activate glitch2 from glitch2.js
+            triggerGlitch2();   // Activate glitch2 from glitch2.js
             break;
         case 'reckon':
             triggerGlitch3();  // Activate glitch3 from glitch3.js
             break;
         case 'sense':
+            triggerGlitch4();
             break;
         case 'find':
             triggerGlitch = true;  // Start triggering glitches for these incorrect words
             break;
         case 'feel':
             clearGlitches();  // Correct answer clears the glitches
+            console.log("Glitches cleared.");
             break;
         case 'think':  
             break;
@@ -90,7 +92,12 @@ function selectOption() {
 
 function triggerGlitchEffect() {
     let rectGlitch = new RectangleGlitch(random(windowWidth), random(windowHeight));
+    console.log("triggering glitch1");
     glitches.push(rectGlitch);
+
+    let rectGlitch4 = new RectangleGlitch4(random(windowWidth), random(windowHeight));
+    console.log("triggering glitch4");
+    glitches.push(rectGlitch4);
 }
 
 function clearGlitches() {
@@ -98,8 +105,12 @@ function clearGlitches() {
     triggerGlitch = false;  // Stop triggering glitches
     deactivateGlitch1();  // Deactivate glitch1 and reset frame rate
     deactivateGlitch2();  // Deactivate glitch2 and stop the sound
-    deactivateGlitch3();  // Deactivate glitch3 and clear the buttons
+    deactivateGlitch3();
+    deactivateGlitch4();
+
+    console.log("All glitches cleared.");
 }
+
 
 function draw() {
     background(black);
@@ -120,6 +131,12 @@ function draw() {
     if (glitch3Active) {
         drawGlitch3();  // Call the draw loop for glitch3
     }
+
+    // Continuously update glitch3 if it's active
+    drawGlitch3();   // Call the glitch3 draw loop
+
+    // Continuously update glitch4 if it's active
+    updateGlitch4();
 
     // Display all regular glitches
     glitches.forEach(glitch => glitch.display());

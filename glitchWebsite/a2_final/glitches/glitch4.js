@@ -1,6 +1,6 @@
 //https://editor.p5js.org/robert0504/sketches/OTBqTTLJ (ref for rectangle class)
 
-class RectangleGlitch {
+class RectangleGlitch4 {
     constructor(x, y) {
         this.x = x;
         this.y = y;
@@ -14,9 +14,9 @@ class RectangleGlitch {
         this.height = random(minHeight, maxHeight);
 
         this.colors = [
-            [0, 255, 0], // Lime green
-            [255, 0, 196], // Neon pink
-            [255, 255, 0], // Yellow
+            [255, 255, 255], // white
+            [0, 0, 255], // neon blue
+            [255, 0, 0], // red
         ];
 
         const selectedColor = random(this.colors);
@@ -32,34 +32,34 @@ class RectangleGlitch {
     }
 }
 
-let glitch1Active = false;
-let glitch1Glitches = [];  // To store multiple glitches
+let glitch4Active = false;
+let glitch4Glitches = [];  // To store multiple glitches
 
-function triggerGlitch1() {
+function triggerGlitch4() {
     frameRate(5);  // Slow down the frame rate to 5 FPS
-    glitch1Active = true;  // Activate glitch1
+    glitch4Active = true;  // Activate glitch1
 }
 
-function deactivateGlitch1() {
-    glitch1Active = false;
+function deactivateGlitch4() {
+    glitch4Active = false;
     frameRate(60);  // Reset frame rate to default
-    glitch1Glitches = [];  // Clear the glitch array
+    glitch4Glitches = [];  // Clear the glitch array
 }
 
-function updateGlitch1() {
-    if (glitch1Active) {
+function updateGlitch4() {
+    if (glitch4Active) {
         // Add a new glitch each time `updateGlitch1` is called
-        let rectGlitch = new RectangleGlitch(random(windowWidth), random(windowHeight));
-        glitch1Glitches.push(rectGlitch);
+        let rectGlitch4 = new RectangleGlitch4(random(windowWidth), random(windowHeight));
+        glitch4Glitches.push(rectGlitch4);
         
         // Display all glitches stored in the array
-        glitch1Glitches.forEach(glitch => glitch.display());
+        glitch4Glitches.forEach(glitch => glitch.display());
     }
 }
 // only need this function if i have classes
 
 // Expose the functions and class globally for a2_final.js
-window.RectangleGlitch = RectangleGlitch;
-window.triggerGlitch1 = triggerGlitch1;
-window.deactivateGlitch1 = deactivateGlitch1;
-window.updateGlitch1 = updateGlitch1;
+window.RectangleGlitch = RectangleGlitch4;
+window.triggerGlitch4 = triggerGlitch4;
+window.deactivateGlitch4 = deactivateGlitch4;
+window.updateGlitch4 = updateGlitch4;

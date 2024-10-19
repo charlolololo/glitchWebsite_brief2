@@ -13,6 +13,7 @@ function preload() {
         console.log("Nokia font loaded successfully!");
     });
     song1 = loadSound('data/glitch2_audio.mp3');  // Load sound globally
+    song2 = loadSound('data/glitch5_audio.mp3');  // Load sound globally
 }
 
 function setup() {
@@ -76,6 +77,7 @@ function selectOption() {
             triggerGlitch4();
             break;
         case 'find':
+            triggerGlitch5();
             triggerGlitch = true;  // Start triggering glitches for these incorrect words
             break;
         case 'feel':
@@ -107,6 +109,7 @@ function clearGlitches() {
     deactivateGlitch2();  // Deactivate glitch2 and stop the sound
     deactivateGlitch3();
     deactivateGlitch4();
+    deactivateGlitch5();
 
     console.log("All glitches cleared.");
 }

@@ -6,6 +6,7 @@ let sentence = "She paused and then deleted think,\nreplacing it with";
 let glitches = [];
 let triggerGlitch = false; // Flag to trigger glitches for other types
 let song1;  // Declare song1 globally so it can be used in glitch2.js
+let song2;
 
 function preload() {
     console.log("Preloading assets...");
@@ -85,6 +86,7 @@ function selectOption() {
             console.log("Glitches cleared.");
             break;
         case 'think':  
+            triggerGlitch6();
             break;
         default:
             console.log("No action defined for this option.");
@@ -110,6 +112,7 @@ function clearGlitches() {
     deactivateGlitch3();
     deactivateGlitch4();
     deactivateGlitch5();
+    deactivateGlitch6();
 
     console.log("All glitches cleared.");
 }
@@ -138,8 +141,16 @@ function draw() {
     // Continuously update glitch3 if it's active
     drawGlitch3();   // Call the glitch3 draw loop
 
+
     // Continuously update glitch4 if it's active
     updateGlitch4();
+   
+    if (glitch6Active) {
+       drawGlitch6();  // Call the draw loop for glitch3
+    }
+
+    drawGlitch6(); 
+
 
     // Display all regular glitches
     glitches.forEach(glitch => glitch.display());

@@ -79,11 +79,12 @@ function selectOption() {
             break;
         case 'find':
             triggerGlitch5();
-            triggerGlitch = true;  // Start triggering glitches for these incorrect words
+            //triggerGlitch = true;  // Start triggering glitches for these incorrect words
             break;
         case 'feel':
             clearGlitches();  // Correct answer clears the glitches
             console.log("Glitches cleared.");
+            window.location.href = "feel.html";
             break;
         case 'think':  
             triggerGlitch6();
@@ -103,6 +104,7 @@ function triggerGlitchEffect() {
     console.log("triggering glitch4");
     glitches.push(rectGlitch4);
 }
+
 
 function clearGlitches() {
     glitches = [];  // Clear all glitch effects

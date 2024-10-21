@@ -64,6 +64,7 @@ function windowResize() {
 
 function selectOption() {
     let selectedOption = dropdown.value();
+
     switch (selectedOption) {
         case 'believe':
             triggerGlitch1();   // Activate glitch1 from glitch1.js
@@ -72,22 +73,19 @@ function selectOption() {
             triggerGlitch2();   // Activate glitch2 from glitch2.js
             break;
         case 'reckon':
-            triggerGlitch3();  // Activate glitch3 from glitch3.js
+            triggerGlitch3();   // Activate glitch3 from glitch3.js
             break;
         case 'sense':
-            triggerGlitch4();
+            triggerGlitch4();   // Activate glitch4
             break;
         case 'find':
-            triggerGlitch5();
-            //triggerGlitch = true;  // Start triggering glitches for these incorrect words
+            triggerGlitch5();   // Activate glitch5
             break;
         case 'feel':
-            clearGlitches();  // Correct answer clears the glitches
-            console.log("Glitches cleared.");
-            window.location.href = "feel.html";
+            clearGlitchesAndSwitch();  // Correct answer clears glitches and switches the page
             break;
         case 'think':  
-            triggerGlitch6();
+            triggerGlitch6();   // Activate glitch6
             break;
         default:
             console.log("No action defined for this option.");
@@ -95,26 +93,29 @@ function selectOption() {
     }
 }
 
-function triggerGlitchEffect() {
-    let rectGlitch = new RectangleGlitch(random(windowWidth), random(windowHeight));
-    console.log("triggering glitch1");
-    glitches.push(rectGlitch);
-
-    let rectGlitch4 = new RectangleGlitch4(random(windowWidth), random(windowHeight));
-    console.log("triggering glitch4");
-    glitches.push(rectGlitch4);
+function clearGlitchesAndSwitch() {
+    // Clear glitches and ensure the page switches correctly
+    clearGlitches();  // Clears glitches
+    console.log("Glitches cleared and switching page.");
+    
+    // Ensure glitches are completely cleared before switching
+    setTimeout(() => {
+        window.location.href = "feel.html";
+    }, 500);  // 500ms delay
 }
 
 
 function clearGlitches() {
     glitches = [];  // Clear all glitch effects
     triggerGlitch = false;  // Stop triggering glitches
-    deactivateGlitch1();  // Deactivate glitch1 and reset frame rate
-    deactivateGlitch2();  // Deactivate glitch2 and stop the sound
-    deactivateGlitch3();
-    deactivateGlitch4();
-    deactivateGlitch5();
-    deactivateGlitch6();
+    
+    // Deactivate all glitches, ensuring they are fully stopped
+    if (glitch1Active) deactivateGlitch1();
+    if (glitch2Active) deactivateGlitch2();
+    if (glitch3Active) deactivateGlitch3();
+    if (glitch4Active) deactivateGlitch4();
+    if (glitch5Active) deactivateGlitch5();
+    if (glitch6Active) deactivateGlitch6();
 
     console.log("All glitches cleared.");
 }
@@ -123,11 +124,11 @@ function clearGlitches() {
 function draw() {
     background(black);
     
-    // Redraw text
+    // Redraw the main text
     fill(lime);
     text(sentence, 100, 100);
     
-    // Trigger glitches for other incorrect selections
+    // Trigger glitches if necessary
     if (triggerGlitch) {
         triggerGlitchEffect();
     }
@@ -135,25 +136,17 @@ function draw() {
     // Continuously update glitch1 if it's active
     updateGlitch1();
 
-    // Trigger glitch3 if active
-    if (glitch3Active) {
-        drawGlitch3();  // Call the draw loop for glitch3
-    }
-
     // Continuously update glitch3 if it's active
-    drawGlitch3();   // Call the glitch3 draw loop
-
-
-    // Continuously update glitch4 if it's active
-    updateGlitch4();
-   
-    if (glitch6Active) {
-       drawGlitch6();  // Call the draw loop for glitch3
+    if (glitch3Active) {
+        drawGlitch3();   // Call the draw loop for glitch3
     }
 
-    drawGlitch6(); 
+    // Continuously update glitch4
+    updateGlitch4();
 
+    // Continuously update glitch6
+    drawGlitch6();
 
-    // Display all regular glitches
+    // Display regular glitches
     glitches.forEach(glitch => glitch.display());
 }

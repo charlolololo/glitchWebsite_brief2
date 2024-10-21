@@ -23,7 +23,7 @@ function setup() {
     text(sentence2, width/2, height/2 + 30);
 
     // Create a button that leads back to index.html
-    let backButton = createButton('<');
+    let backButton = createButton('Restart');
     backButton.position(width / 2 - 50, height -150);
     backButton.style('font-family', 'nokia');
     backButton.style('font-size', '20px');
